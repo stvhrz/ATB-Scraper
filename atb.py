@@ -57,7 +57,7 @@ def parse_products(html):
 
 
 def generate_recipes(products):
-    # Розширені категорії продуктів
+ 
     categories = {
         "meat": ["курятина", "свинина", "яловичина", "ковбаса", "фарш", "м’ясо", "куриця", "індичка"],
         "vegetables": ["картопля", "морква", "цибуля", "помідор", "капуста", "перець", "огірок", "буряк", "кабачок"],
@@ -67,7 +67,7 @@ def generate_recipes(products):
         "other": ["яйця", "олія", "цукор", "борошно", "хліб"]
     }
 
-    # Збираємо доступні продукти по категоріях
+
     available = {cat: [] for cat in categories}
     for product in products:
         name = product["name"].lower()
@@ -86,7 +86,7 @@ def generate_recipes(products):
         if items:
             print(f"{cat}: {', '.join(p['name'] for p in items)}")
 
-    # Генеруємо рецепти
+
     recipes = []
 
     # Рецепт 1: М’ясо + овочі
@@ -133,7 +133,7 @@ def generate_recipes(products):
     return recipes
 
 
-# Налаштування Selenium
+#Selenium
 options = Options()
 options.add_argument("--headless=new")
 options.add_argument("--disable-blink-features=AutomationControlled")
@@ -143,7 +143,7 @@ options.add_argument(
 service = Service(ChromeDriverManager().install())
 browser = webdriver.Chrome(service=service, options=options)
 
-# Базовий URL
+#URL
 base_url = "https://www.atbmarket.com/shop/catalog/load-products?type=economy&shop_id=101332&store_id=1154&offset={offset}"
 all_products = []
 offset = 0
@@ -166,7 +166,7 @@ while True:
     for i, product in enumerate(products, start=len(all_products) - len(products) + 1):
         print(f"{i}. {product['name']} - {product['quantity']}")
 
-    # Генеруємо рецепти з усіх продуктів
+    # Генерація рецептів
     recipes = generate_recipes(all_products)
     if recipes:
         print("\nМожливі рецепти на основі зібраних продуктів:")
